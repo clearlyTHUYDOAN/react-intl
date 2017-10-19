@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { FormattedDate, FormattedTime } from 'react-intl';
-import { Link } from 'react-router-dom';
 
 // I know this component is the exact same as the Batman. 
 export default class Robin extends Component {
