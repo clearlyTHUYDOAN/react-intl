@@ -1,5 +1,16 @@
 {
     "fr": {
-        "test.welcome": "FRENCH TRANSLATION OUI"
+        "test.greeting": "Bonjour, Petit {user}.",
+        "test.time": "Il est actuellement {theTime}.",
+        "test.welcome": "Vous avez {unreadCount, plural, =0 {aucun message non lu} one {# message non lu} other {# messages non lus}}.",
+        "test.assignments": "{assignmentsDue, number} {assignmentsDue, plural, one {mission due} other {missions dues}}.",
+        "test.nextAssignment": "Mission #{nextAssignmentNumber, number} est dû à {dueInDays, number} {dueInDays, plural, one {journée} other {journées}}.",
+        "test.nested": "{correct, plural, =0 {pas de questions répondues correctement} one {# question répondue correctement} other {# questions répondues correctement}}.",
+        "test.correctQuestions": "{correct, number} / {total, number} {correct, plural, one {question répondue correctement} other {questions répondues correctement}}.",
+        "test.percentage": "Ceci est un pourcentage aléatoire qui a commencé comme une décimale: {randomPercentage, number, percent}.",
+        "test.lastLoginTime": "Votre dernière connexion {lastLoginTime}."
+    },
+    "es": {
+        "test.assignments": "{assignmentsDue, number} {assignmentsDue, plural, one {asignación} other {tareas}} pendientes."
     }
 }

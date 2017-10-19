@@ -38,30 +38,43 @@ export default class Prodigy extends Component {
         this.state = {
             user       : 'Ed',
             unreadCount: 0,
-            assignmentsDue: 2, // ASSESS: Cannot style numbers? Maybe use FormattedNumber as a workaround...
+            assignmentsDue: 2, // To format numbers, add Formatted component inside of values prop.
             nextAssignmentNumber: 20,
             dueInDays: 3,
             questions: { // Confirmed: Can use nested objects.
                 correct: 12,
                 total: 15
             },
-            randomPercentage: 0.5
+            randomPercentage: 0.5,
+            lastLoginTime: new Date(),
+            theTime: new Date()
         }
     }
     render() {
-        const { user, unreadCount, assignmentsDue, nextAssignmentNumber, dueInDays, questions, randomPercentage } = this.state;
+        const { user, unreadCount, assignmentsDue, nextAssignmentNumber, dueInDays, questions, randomPercentage, lastLoginTime } = this.state;
         return (
             <StyledContainer>
-                <h1>Hello, Little Ed.</h1>
+                <h1>
+                    <FormattedMessage
+                        id={"test.greeting"}
+                        defaultMessage={`Hello, Little {user}.`}
+                        values={{user}}
+                    />
+                </h1>
                 <StyledFormattedTime>
-                    It is currently {' '}
-                    <TestWrapperAroundFormatted>
-                        <TestFormattedTime 
-                            value={Date.now()}
-                            hour="2-digit"
-                            minute="numeric"
-                        />.
-                    </TestWrapperAroundFormatted>
+                    <FormattedMessage
+                        id={"test.time"}
+                        defaultMessage={`It is currently {theTime}.`}
+                        values={{theTime: (
+                            <TestWrapperAroundFormatted>
+                                <TestFormattedTime 
+                                    value={Date.now()}
+                                    hour="2-digit"
+                                    minute="numeric"
+                                />
+                            </TestWrapperAroundFormatted>
+                        )}}
+                    />
                 </StyledFormattedTime>
                 <StyledImg 
                     src="https://www.prodigygame.com/assets/images/svg/ed/ed-parent.svg"
@@ -83,13 +96,19 @@ export default class Prodigy extends Component {
                     {/* Sample error message: [React Intl] Missing message: "test.welcome" for locale: "ja", using default message as fallback. */}
                     {/* Message Formatting Fallback Resource on the Algorithm: https://github.com/yahoo/react-intl/wiki/API#message-formatting-fallbacks */}
                 </p>
-                <p>You last logged in {' '}
-                    <FormattedRelative
-                        // updateInterval={15000} // In milliseconds. 10 seconds by default.
-                        value={new Date()} // Expects value that can be parsed as date.
-                        options={{style: 'best fit'}} // It will do the correct units by default.
-                        // Should be able to control frequency of updating relative time.
-                    />.
+                <p>
+                    <FormattedMessage
+                        id={"test.lastLoginTime"}
+                        defaultMessage={`You last logged in {lastLoginTime}.`}
+                        values={{lastLoginTime: (
+                            <FormattedRelative
+                                // updateInterval={15000} // In milliseconds. 10 seconds by default.
+                                value={lastLoginTime} // Expects value that can be parsed as date.
+                                options={{style: 'best fit'}} // It will do the correct units by default.
+                                // Should be able to control frequency of updating relative time.
+                            />
+                        )}}
+                    />
                 </p>
                 <h3>{/* Will output as a span by default if you don't enclose with another tag. */}
                     <FormattedMessage

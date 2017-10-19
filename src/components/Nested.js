@@ -10,7 +10,7 @@ import styled from 'styled-components';
 const Nested = ({ correct, total}) => (
     <p>
         <FormattedMessage
-            id="test.Nested"
+            id="test.nested"
             defaultMessage={`{correct, plural,
             =0 {No questions}
             one {# question}
