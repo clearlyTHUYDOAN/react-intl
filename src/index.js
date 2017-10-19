@@ -1,5 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
 import { IntlProvider, addLocaleData } from 'react-intl';
 import { BrowserRouter } from 'react-router-dom';
 
@@ -15,6 +16,7 @@ import ja from 'react-intl/locale-data/ja';
 import App from './App';
 
 import './index.css';
+import store from './utilities/createStore';
 
 addLocaleData([...en, ...es, ...fr, ...it, ...ja]);
 
@@ -28,10 +30,28 @@ addLocaleData([...en, ...es, ...fr, ...it, ...ja]);
 const language = "fr";
 
 render(
-    <IntlProvider locale={language}>
-        <BrowserRouter>
-            <App locale={language} />
-        </BrowserRouter>
-    </IntlProvider>,
+    <Provider store={store}>
+        <IntlProvider locale={language}>
+            <BrowserRouter>
+                <App locale={language} />
+            </BrowserRouter>
+        </IntlProvider>
+    </Provider>,
     document.getElementById('root')
 );
+
+
+if (module.hot) {
+    module.hot.accept('./App', () => {
+        render(
+            <Provider store={store}>
+                <IntlProvider locale={language}>
+                    <BrowserRouter>
+                        <App locale={language} />
+                    </BrowserRouter>
+                </IntlProvider>
+            </Provider>,
+            document.getElementById('root')
+        );
+    });
+}
