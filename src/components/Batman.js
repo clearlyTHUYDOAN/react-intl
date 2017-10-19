@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { FormattedDate, FormattedTime } from 'react-intl';
-import { Link } from 'react-router-dom';
 
 // Component Source: https://github.com/yahoo/react-intl/wiki/Components
 
@@ -18,7 +17,7 @@ export default class Batman extends Component {
             <div>
                 <h1>Hello, Mr. Wayne.</h1>
                 <div>
-                    It is currently {' '} {/* ADDRESS: Can you use non-24 hour clock? */}
+                    It is currently {' '}
                     <FormattedTime 
                         value={Date.now()}
                         hour="2-digit"
