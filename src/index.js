@@ -16,7 +16,10 @@ import ja from 'react-intl/locale-data/ja';
 import App from './App';
 
 import './index.css';
+// Wherever translations are stored, must pass it to IntlProvider via messages prop.
+import translations from './translations.json'; 
 import store from './utilities/createStore';
+// import ConnectedIntlProvider from './utilities/connectedIntlProvider';
 
 addLocaleData([...en, ...es, ...fr, ...it, ...ja]);
 
@@ -27,11 +30,21 @@ addLocaleData([...en, ...es, ...fr, ...it, ...ja]);
 // navigator.language ||
 // navigator.userLanguage;
 
-const language = "fr";
+const language = "en";
+
+// Split locales with a region code i.e. en-US
+const languageWithoutRegionCode = language.toLowerCase().split(/[_-]+/)[0];
+
+// react-intl does not provide direct translations outside of standard locale conventions
+// TODO: Where to store translations?
+// TODO: What to translate with?
+
+// Try full locale, fallback to locale without region code, fallback to en
+const messages = translations[languageWithoutRegionCode] || translations[language] || translations.en;
 
 render(
     <Provider store={store}>
-        <IntlProvider locale={language}>
+        <IntlProvider locale={language} messages={messages} >
             <BrowserRouter>
                 <App locale={language} />
             </BrowserRouter>
@@ -41,17 +54,17 @@ render(
 );
 
 
-if (module.hot) {
-    module.hot.accept('./App', () => {
-        render(
-            <Provider store={store}>
-                <IntlProvider locale={language}>
-                    <BrowserRouter>
-                        <App locale={language} />
-                    </BrowserRouter>
-                </IntlProvider>
-            </Provider>,
-            document.getElementById('root')
-        );
-    });
-}
+// if (module.hot) {
+//     module.hot.accept('./App', () => {
+//         render(
+//             <Provider store={store}>
+//                 <IntlProvider locale={language}>
+//                     <BrowserRouter>
+//                         <App locale={language} />
+//                     </BrowserRouter>
+//                 </IntlProvider>
+//             </Provider>,
+//             document.getElementById('root')
+//         );
+//     });
+// }
