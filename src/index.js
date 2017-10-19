@@ -52,19 +52,3 @@ render(
     </Provider>,
     document.getElementById('root')
 );
-
-
-// if (module.hot) {
-//     module.hot.accept('./App', () => {
-//         render(
-//             <Provider store={store}>
-//                 <IntlProvider locale={language}>
-//                     <BrowserRouter>
-//                         <App locale={language} />
-//                     </BrowserRouter>
-//                 </IntlProvider>
-//             </Provider>,
-//             document.getElementById('root')
-//         );
-//     });
-// }
