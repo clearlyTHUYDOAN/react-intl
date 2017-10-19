@@ -1,5 +1,17 @@
 import React, { Component } from 'react';
-import { FormattedDate, FormattedTime } from 'react-intl';
+import styled from 'styled-components';
+import { FormattedDate, FormattedTime, FormattedNumber } from 'react-intl';
+
+// Must wrap to style the FormattedComponent by itself.
+const StyledFormattedNumber = styled.span`
+    font-weight: bold;
+`
+
+// Doesn't work overall.
+// const StyledFormattedNumber = styled(FormattedNumber)`
+//     {${props => console.log(props)}} {/* This prop passing works for styled components. */}
+//     font-weight: bold;
+// `
 
 // Component Source: https://github.com/yahoo/react-intl/wiki/Components
 
@@ -38,6 +50,12 @@ export default class Batman extends Component {
                         weekday='long'
                     />
                 .</p>
+                <p>
+                    Your next flight is in {' '}
+                    <StyledFormattedNumber><FormattedNumber
+                        value={3}
+                    /></StyledFormattedNumber> days.
+                </p>
             </div>
         );
     }

@@ -1,6 +1,17 @@
 import React, { Component } from 'react';
-import { FormattedTime, FormattedMessage, FormattedRelative } from 'react-intl'
+import { 
+    FormattedTime, 
+    FormattedMessage, 
+    FormattedRelative,
+    FormattedNumber 
+} from 'react-intl'
 import styled from 'styled-components';
+
+import Nested from './Nested';
+
+const StyledContainer = styled.div`
+    font-size: 0.7em;
+`
 
 const StyledImg = styled.img`
     padding: 11px 0;
@@ -27,13 +38,20 @@ export default class Prodigy extends Component {
         this.state = {
             user       : 'Ed',
             unreadCount: 0,
-            assignmentsDue: 2 // ASSESS: Cannot style numbers?
+            assignmentsDue: 2, // ASSESS: Cannot style numbers? Maybe use FormattedNumber as a workaround...
+            nextAssignmentNumber: 20,
+            dueInDays: 3,
+            questions: { // Confirmed: Can use nested objects.
+                correct: 12,
+                total: 15
+            },
+            randomPercentage: 0.5
         }
     }
     render() {
-        const { user, unreadCount, assignmentsDue } = this.state;
+        const { user, unreadCount, assignmentsDue, nextAssignmentNumber, dueInDays, questions, randomPercentage } = this.state;
         return (
-            <div>
+            <StyledContainer>
                 <h1>Hello, Little Ed.</h1>
                 <StyledFormattedTime>
                     It is currently {' '}
@@ -54,17 +72,21 @@ export default class Prodigy extends Component {
                     <FormattedMessage
                         id="test.welcome" // Must be unique for every message defined in your app.
                         // String defaults to this if you cannot find the locale equivalent of the message at that id.
-                        defaultMessage={`You have {unreadCount, number} unread {unreadCount, plural,
-                        one {message}
-                        other {messages}
+                        defaultMessage={`You have {unreadCount, plural,
+                        =0 {no unread messages}
+                        one {# unread message}
+                        other {# unread messages}
                         }.`}
-                        values={{user: <b>{user}</b>, unreadCount}}
+                        values={{user: <b>{user}</b>, unreadCount}} // Must pass an object to values.
                     />
-                    {/*Sample error message: [React Intl] Missing message: "test.welcome" for locale: "ja", using default message as fallback.*/}
+                    {/* In the output of the match, the # special token can be used as a placeholder for the numeric value and will be formatted as if it were {key, number}. */}
+                    {/* Sample error message: [React Intl] Missing message: "test.welcome" for locale: "ja", using default message as fallback. */}
+                    {/* Message Formatting Fallback Resource on the Algorithm: https://github.com/yahoo/react-intl/wiki/API#message-formatting-fallbacks */}
                 </p>
                 <p>You last logged in {' '}
                     <FormattedRelative
-                        value={new Date() - 1000 * 60 * 60 * 2} // Expects value that can be parsed as date.
+                        // updateInterval={15000} // In milliseconds. 10 seconds by default.
+                        value={new Date()} // Expects value that can be parsed as date.
                         options={{style: 'best fit'}} // It will do the correct units by default.
                         // Should be able to control frequency of updating relative time.
                     />.
@@ -80,7 +102,38 @@ export default class Prodigy extends Component {
                     />
                     {/*Sample error message: [React Intl] Missing message: "test.welcome" for locale: "ja", using default message as fallback.*/}
                 </h3>
-            </div>
+                <h5>
+                    <FormattedMessage
+                        id="test.nextAssignment"
+                        defaultMessage={`Assignment #{nextAssignmentNumber, number} is due in {dueInDays, number} {dueInDays, plural,
+                        one {day}
+                        other {days}
+                        }.`}
+                        values={{nextAssignmentNumber, dueInDays}}
+                    />
+                </h5>
+                <div>
+                    <Nested {...this.state.questions} />
+                </div>
+                <p> {/* Another object property test. */}
+                    <FormattedMessage
+                        id="test.correctQuestions"
+                        defaultMessage={`{correct, number} / {total, number} {correct, plural,
+                        one {question}
+                        other {questions}
+                        } answered correctly.`}
+                        values={questions}
+                    />
+                </p>
+                <p>
+                    {/* Converts decimal to percent only? */}
+                    <FormattedMessage
+                        id="test.percentage"
+                        defaultMessage={`This is a random percentage that started as a decimal: {randomPercentage, number, percent}.`}
+                        values={{randomPercentage}}
+                    />
+                </p>
+            </StyledContainer>
         );
     }
 }
