@@ -8,7 +8,8 @@
         "test.nested": "{correct, plural, =0 {pas de questions répondues correctement} one {# question répondue correctement} other {# questions répondues correctement}}.",
         "test.correctQuestions": "{correct, number} / {total, number} {correct, plural, one {question répondue correctement} other {questions répondues correctement}}.",
         "test.percentage": "Ceci est un pourcentage aléatoire qui a commencé comme une décimale: {randomPercentage, number, percent}.",
-        "test.lastLoginTime": "Votre dernière connexion {lastLoginTime}."
+        "test.lastLoginTime": "Votre dernière connexion {lastLoginTime}.",
+        "test.locale": "L'environnement local actuel est {locale}."
     },
     "es": {
         "test.assignments": "{assignmentsDue, number} {assignmentsDue, plural, one {asignación} other {tareas}} pendientes."

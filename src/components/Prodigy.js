@@ -10,7 +10,7 @@ import styled from 'styled-components';
 import Nested from './Nested';
 
 const StyledContainer = styled.div`
-    font-size: 0.7em;
+    font-size: 1em;
 `
 
 const StyledImg = styled.img`
