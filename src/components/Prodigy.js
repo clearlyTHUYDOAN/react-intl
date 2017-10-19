@@ -31,7 +31,7 @@ const StyledFormattedTime = styled.div`
     font-weight: 300;
     color: red;
 `
-
+// asdadasd
 export default class Prodigy extends Component {
     constructor() {
         super();
