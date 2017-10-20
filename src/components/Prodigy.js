@@ -3,7 +3,8 @@ import {
     FormattedTime, 
     FormattedMessage, 
     FormattedRelative,
-    FormattedNumber 
+    injectIntl,
+    defineMessages
 } from 'react-intl'
 import styled from 'styled-components';
 
@@ -32,7 +33,15 @@ const StyledFormattedTime = styled.div`
     color: red;
 `
 
-export default class Prodigy extends Component {
+const img = defineMessages({
+    alt: {
+        id: "test.alt",
+        description: "testing translating things that can't be wrapped",
+        defaultMessage: "prodigy logo"
+    }
+})
+
+class Prodigy extends Component {
     constructor() {
         super();
         this.state = {
@@ -51,6 +60,7 @@ export default class Prodigy extends Component {
         }
     }
     render() {
+        const { intl } = this.props;
         const { user, unreadCount, assignmentsDue, nextAssignmentNumber, dueInDays, questions, randomPercentage, lastLoginTime } = this.state;
         return (
             <StyledContainer>
@@ -79,7 +89,7 @@ export default class Prodigy extends Component {
                 <StyledImg 
                     src="https://www.prodigygame.com/assets/images/svg/ed/ed-parent.svg"
                     height="250" 
-                    alt="ed parent"
+                    alt={intl.formatMessage(img.alt)}
                 />
                 <p>
                     <FormattedMessage
@@ -156,3 +166,8 @@ export default class Prodigy extends Component {
         );
     }
 }
+
+export default injectIntl(Prodigy); 
+// Need to wrap your component with this if you're using the formatting API
+// A good use case if you need to make sure the alt of an image gets translated
+// since this is a place where you can't wrap it with a Formatted component.
