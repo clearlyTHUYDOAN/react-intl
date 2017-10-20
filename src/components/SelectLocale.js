@@ -1,7 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-export default class SelectLocale extends Component {
+import { updateLocale } from '../actions/locales';
+
+const mapStateToProps = state => ({
+    currentLocale: state.currentLocale,
+})
+  
+const mapDispatchToProps = {
+    updateLocale
+}
+
+class SelectLocale extends Component {
     render() {
+        const { currentLocale, updateLocale } = this.props;
         return (
             <select>
                 <option value="en">English</option>
@@ -13,3 +25,5 @@ export default class SelectLocale extends Component {
         );
     }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(SelectLocale); 
