@@ -1,6 +1,6 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
 // Doesn't work.
 // const StyledFormattedMessage = styled.span`
@@ -15,7 +15,7 @@ const Nested = ({ correct, total}) => (
             =0 {No questions}
             one {# question}
             other {# questions}
-            } answered correctly.`}
+            } answered CORRECTLY.`}
             values={{correct}}
         />
     </p>
