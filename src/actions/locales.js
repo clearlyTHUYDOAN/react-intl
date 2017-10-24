@@ -3,6 +3,8 @@ export const ACTION_TYPES = {
 }
 
 export function updateLocale(locale) {
+    localStorage.setItem('testLocale', locale)
+    window.location.reload();
     return {
         type: ACTION_TYPES.updateLocale,
         payload: locale,
