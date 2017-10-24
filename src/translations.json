@@ -10,7 +10,7 @@
         "test.correctQuestions": "{correct, number} / {total, number} {correct, plural, one {question répondue correctement} other {questions répondues correctement}}.",
         "test.percentage": "Ceci est un pourcentage aléatoire qui a commencé comme une décimale: {randomPercentage, number, percent}.",
         "test.lastLoginTime": "Votre dernière connexion {lastLoginTime}.",
-        "test.locale": "L'environnement local actuel est {locale}.",
+        "test.locale": "L'environnement local actuel est {currentLocale}.",
         "test.alt": "french translation test with formatting api"
     },
     "es": {
