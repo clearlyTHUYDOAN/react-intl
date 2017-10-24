@@ -3,13 +3,13 @@ import { FormattedMessage } from 'react-intl';
 
 export default class LocaleInfo extends Component {
     render() {
-        const { locale } = this.props;
+        const { currentLocale } = this.props;
         return (
             <p>
                 <FormattedMessage
                     id={"test.locale"}
-                    defaultMessage={`The current locale is {locale}.`}
-                    values={{locale}}
+                    defaultMessage={`The current locale is {currentLocale}.`}
+                    values={{currentLocale}}
                 />
             </p>
         );

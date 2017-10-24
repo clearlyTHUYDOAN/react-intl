@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Route, Link, withRouter } from 'react-router-dom';
 
 import Batman from './components/Batman';
 import Robin from './components/Robin';
 import Prodigy from './components/Prodigy';
 import LocaleInfo from './components/LocaleInfo';
-// import SelectLocale from './components/SelectLocale';
+import SelectLocale from './components/SelectLocale';
 
 import './App.css';
+// import { updateLocale } from './actions/locales';
 
 class App extends Component {
   render() {
-        const { locale } = this.props;
+        const { currentLocale } = this.props;
     return (
         <div>
             <h1>React Intl + React Router</h1>
@@ -19,12 +21,20 @@ class App extends Component {
             <Route exact path="/" component={Batman} />
             <Route path="/robin" component={Robin} />
             <Route path="/prodigy" component={Prodigy} />
-            <LocaleInfo locale={locale} />
+            <LocaleInfo currentLocale={currentLocale} />
             {/* How can we utilize a menu to let users change their locale? */}
-            {/* <SelectLocale /> */}
+            <SelectLocale />
         </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+    currentLocale: state.currentLocale,
+})
+  
+// const mapDispatchToProps = {
+//     updateLocale
+// }
+
+export default withRouter(connect(mapStateToProps, null)(App));
